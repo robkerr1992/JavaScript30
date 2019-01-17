@@ -32,28 +32,96 @@
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
+    const oldInventors = inventors.filter(inventor => inventor.year >= 1500 && inventor.year < 1600);
+    console.log(oldInventors);
+
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+
+    const inventorNames = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+    console.log(inventorNames);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
+    const happyBirthday = inventors.sort((a,b) => {
+        if(a.year > b.year){
+            return -1
+        }
+        if(a.year < b.year){
+            return 1
+        }
+        return 0;
+    });
+    console.log(happyBirthday);
+
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
 
+    //i though this one didn't work until i realized i didn't pass in an initial value for the accumulator *facepalm*
+    const lifeSpan = inventors.reduce((accumulator, inventor) => accumulator + (inventor.passed - inventor.year), 0);
+
+    // const lifeSpan = inventors.reduce(function(value, inventor) {
+    //     return value + (inventor.passed - inventor.year);
+    // }, 0);
+
+    console.log(lifeSpan);
+
     // 5. Sort the inventors by years lived
 
+    const lifeSpanSorted = inventors.sort((a, b) => {
+        lifeSpanA = a.passed - a.year;
+        lifeSpanB = b.passed - b.year;
+        if(lifeSpanA > lifeSpanB){
+            return 1
+        }
+        if(lifeSpanA < lifeSpanB){
+            return -1
+        }
+        return 0;
+    });
+    console.log(lifeSpanSorted);
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+
+    // const page = document.querySelector('.mw-category');
+    // const links = [...page.querySelectorAll('a')];
+    // const streets = links
+    //     .map(link => link.textContent)
+    //     // .filter(text => text.includes('de')); //another way of filtering
+    //     .filter(text => text.indexOf('de') > -1);
+
+    // const links = Array.from(page.querySelectorAll('a'));
+    //.filter(link => link.indexOf('de'))
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const lastNameSorted = people.sort( (a, b) => {
+        lastNameA = a.slice(0,a.indexOf(","));
+        lastNameB = b.slice(0,b.indexOf(","));
+        if(lastNameA > lastNameB){
+            return 1
+        }
+        if(lastNameA < lastNameB){
+            return -1
+        }
+        return 0;
+    });
+    console.log(lastNameSorted);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    // vehicleCounts = data.reduce((accumulator, value) => accumulator[value] = accumulator[value] !== undefined ? accumulator[value] + 1 : 1, {});
+    const vehicleCounts = data.reduce(function(accumulator, value) {
+        if(!accumulator[value]){
+            accumulator[value] = 0;
+        }
+        accumulator[value]++;
+        return accumulator;
+    }, {});
+    console.log(vehicleCounts);
   </script>
 </body>
 </html>
