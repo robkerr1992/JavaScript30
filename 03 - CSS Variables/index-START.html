@@ -5,47 +5,76 @@
   <title>Scoped CSS Variables and JS</title>
 </head>
 <body>
-  <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+<h2>Update CSS Variables with <span class='hl'>JS</span></h2>
 
-  <div class="controls">
-    <label for="spacing">Spacing:</label>
-    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+<div class="controls">
+  <label for="spacing">Spacing:</label>
+  <input id="spacing" type="range" name="spacing" min="10" max="200" value="25" data-sizing="px">
 
-    <label for="blur">Blur:</label>
-    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+  <label for="blur">Blur:</label>
+  <input id="blur" type="range" name="blur" min="0" max="25" value="0" data-sizing="px">
 
-    <label for="base">Base Color</label>
-    <input id="base" type="color" name="base" value="#ffc600">
-  </div>
+  <label for="base">Base Color</label>
+  <input id="base" type="color" name="base" value="#008000">
+</div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+<img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
-  <style>
+<style>
+  :root {
+    --spacing: 25px;
+    --blur: 0px;
+    --base: green;
+  }
 
-    /*
-      misc styles, nothing to do with CSS variables
-    */
+  img {
+    padding: var(--spacing);
+    background: var(--base);
+    filter: blur(var(--blur));
+  }
 
-    body {
-      text-align: center;
-      background: #193549;
-      color: white;
-      font-family: 'helvetica neue', sans-serif;
-      font-weight: 100;
-      font-size: 50px;
+  .hl {
+    color: var(--base);
+  }
+
+  /*
+    misc styles, nothing to do with CSS variables
+  */
+
+  body {
+    text-align: center;
+    background: #193549;
+    color: white;
+    font-family: 'helvetica neue', sans-serif;
+    font-weight: 100;
+    font-size: 50px;
+  }
+
+  .controls {
+    margin-bottom: 50px;
+  }
+
+  input {
+    width: 100px;
+  }
+</style>
+
+<script>
+    // const spacing = document.querySelector('#spacing');
+    // const blur = document.querySelector('#blur');
+    // const base = document.querySelector('#base');
+    const inputs = document.querySelectorAll('.controls input');
+
+    function change() {
+        const dataType = this.dataset.sizing || '';
+        document.documentElement.style.setProperty(`--${this.name}`, this.value + dataType);
     }
+    inputs.forEach(input => input.addEventListener('change', change));
+    inputs.forEach(input => input.addEventListener('mousemove', change));
+</script>
 
-    .controls {
-      margin-bottom: 50px;
-    }
-
-    input {
-      width: 100px;
-    }
-  </style>
-
-  <script>
-  </script>
 
 </body>
 </html>
+
+
