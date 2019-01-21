@@ -18,28 +18,56 @@
     }
 
     // Regular
+    console.log(dogs);
 
     // Interpolated
+    console.log(`${dogs}`);
 
     // Styled
+    console.log('%c Style me', 'font-size:25, border: 1px solid red; background: yellow;')
 
     // warning!
+    console.warn('warning!');
 
     // Error :|
-
+    console.error('error!');
     // Info
+    console.info('your house is not an ATM!');
 
     // Testing
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('nickplz'), 'no nickisms present')
 
     // clearing
+    console.clear();
 
     // Viewing DOM Elements
+    //just prints element
+    console.log(p);
+    //prints element with array functions and other info
+    console.dir(p);
 
     // Grouping together
+    dogs.forEach(dog => {
+        console.groupCollapsed(`${dog.name}`);
+        console.log(`${dog.name}`);
+        console.log(`${dog.name} is ${dog.age}`);
+        console.log(`${dog.name} is ${dog.age * 7} in dog years`);
+        console.groupEnd(`${dog.name}`);
+    });
 
     // counting
+    console.count('dogs');
+    console.count('dogs');
+    console.count('dogs');
+    console.count('dogs');
+    console.count('dogs');
+    console.count('dogs');
 
     // timing
+    console.time('something');
+    //do something;
+    console.timeEnd('something');
 
   </script>
 </body>
