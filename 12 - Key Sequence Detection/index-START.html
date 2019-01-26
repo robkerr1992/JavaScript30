@@ -7,6 +7,19 @@
 </head>
 <body>
 <script>
+  let keys = [];
+  const secretCode = ['r','k','s', 'u', 'g', 'a', 'r', 'f', 'r','e','e'];
+  document.addEventListener('keyup', (e) => {
+    keys.push(e.key);
+    let currentIndex;
+    if(!(keys[keys.length -1] === secretCode[keys.length -1])) {
+      keys = [];
+    }
+    if(keys.join('') === secretCode.join('')) {
+      cornify_add();
+      keys = [];
+    }
+  });
 </script>
 </body>
 </html>
